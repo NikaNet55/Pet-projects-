@@ -4,8 +4,14 @@ from sys import exit
 from time import sleep
 
 
-def guess_game(users_answer: int) -> int:  # функция процесса загадывания и угадывания числа.
-    # Принимает предположение пользователя, возвращает количество набранных очков
+def guess_game(users_answer: int) -> int: 
+        """
+    функция процесса загадывания и угадывания числа.
+
+    Принимает предположение пользователя, возвращает количество набранных очков
+    :param users_answer: ответ пользователя
+    :return: очки набранные пользователем
+    """
     guess_num = randrange(1, 11, 1)
     user_score = 10
     tryes = 1
@@ -14,7 +20,7 @@ def guess_game(users_answer: int) -> int:  # функция процесса з�
         if users_answer is str:
             print('Я загадал число, а не букву. Попробуй ещё раз')
             users_answer = int(input())
-        elif 0 > users_answer or users_answer > 10 or users_answer == float():
+        elif 0 > users_answer or users_answer > 10 or isinstance(users_answer, float):
             print(" Я загадал число от 1, до 10. Твой вариант не подходит.")
             users_answer = int(input())
         elif users_answer in user_answer_vars:
