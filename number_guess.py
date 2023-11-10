@@ -46,20 +46,21 @@ def guess_game(users_answer: int) -> int:
 
 total_score = 0
 games = 0
+access_answers = ('yes', 'y', 'no', 'n')
 print(' Привет! Давай сыграем с тобой в игру. Я загадаю целое число от 1, до 10, а ты попробуешь угадать.'
       '\n Сыграем? Yes(y)/No(n)')
 answer = str(input())
-while answer.lower() != 'yes' and answer.lower() != 'y' and answer.lower() != 'no' and answer.lower() != 'n':
+while answer.lower() not in access_answers:
     print('Ответьте Yes(y)/No(n)')
     answer = str(input())
-if answer.lower() == 'yes' or answer.lower() == 'y':
+if answer.lower() in access_answers[:2]:
     print(' Я загадал число. Тебе нужно ввести ответ, если он верный ты победил и получаешь 10 очков!\n'
           'А если нет, у тебя будут ещё попытки, пока не получится, но за каждую из них, ты потеряешь одно очко.'
           'Твоя попытка №1.\n Твой ответ:')
     user_answer = int(input())
     total_score += guess_game(user_answer)  # вызов игры и подсчёт набранных очков
     games += 1
-    while answer.lower() == 'yes' or answer.lower() == 'y':
+    while answer.lower() in access_answers[:2]:
         print('Твой общий счёт', total_score, 'к игре №', games,
               '\n Сыграем ещё раз?(Yes(y)/No(no)')
         answer = str(input())
@@ -67,7 +68,7 @@ if answer.lower() == 'yes' or answer.lower() == 'y':
         user_answer = int(input())
         total_score += guess_game(user_answer)
         games += 1
-elif answer.lower() == 'no' or answer.lower() == 'n':
+elif answer.lower() in access_answers[2:]:
     print('Может быть в другой раз')
     sleep(3)
     exit(0)
